@@ -54,7 +54,7 @@ function visualizarPedidos() {
     }
 }
 
-// Exemplo de uso
+
 cadastrarCliente("Rafael", "1234-5678");
 cadastrarCliente("Bruna", "9876-5432");
 cadastrarProduto("Hamburguer", 29.90);
