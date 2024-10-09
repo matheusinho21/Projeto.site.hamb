@@ -1,3 +1,13 @@
+import json
+
+class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self.preco = preco
+
+    def to_dict(self):
+        return {"nome": self.nome, "preco": self.preco}
+
 class Produto:
     def __init__(self, nome, preco):
         self.nome = nome
@@ -11,6 +21,11 @@ class Cliente:
     def __init__(self, nome, identificador):
         self.nome = nome
         self.identificador = identificador
+
+class Pagamento:
+    def __init__(self, metodo, valor_pago):
+        self.metodo = metodo
+        self.valor_pago = valor_pago
 
 class Pedido:
     def __init__(self):
@@ -31,9 +46,12 @@ class Hamburgueria:
         self.adicionar_produtos_iniciais()  # Adicionando produtos iniciais
     
     def adicionar_produtos_iniciais(self):
-        # Adicionando hambúrgueres iniciais com preços atualizados
         self.cadastrar_produto("X Bacon", 23.90)
         self.cadastrar_produto("X Salada", 16.90)
+        self.cadastrar_produto("X Frango", 19.90)
+        self.cadastrar_produto("Coca-Cola 2L", 9.90)
+        self.cadastrar_produto("Fanta Lata", 6.00)
+        self.cadastrar_produto("Sprite 2L", 7.90)
 
     def cadastrar_produto(self, nome, preco):
         novo_produto = Produto(nome, preco)
@@ -81,11 +99,33 @@ class Hamburgueria:
 
         total = pedido.calcular_total()
         print(f'Total do pedido: R${total:.2f}')
-        pagamento = input("Deseja realizar o pagamento? (s/n): ")
-        if pagamento.lower() == 's':
-            print("Pagamento realizado com sucesso!")
+        
+        # Seleção de forma de pagamento
+        print("Escolha a forma de pagamento:")
+        print("1. Cartão de Crédito")
+        print("2. Dinheiro")
+        metodo_pagamento = input("Escolha uma opção: ")
+        
+        valor_pago = float(input("Digite o valor pago: R$"))
+        
+        if metodo_pagamento == '1':
+            pagamento = Pagamento("Cartão de Crédito", valor_pago)
+        elif metodo_pagamento == '2':
+            pagamento = Pagamento("Dinheiro", valor_pago)
         else:
-            print("Pedido não finalizado.")
+            print("Forma de pagamento inválida.")
+            return
+
+        print(f"Forma de pagamento escolhida: {pagamento.metodo}")
+        print(f"Valor total do pedido: R${total:.2f}")
+        print(f"Valor pago: R${pagamento.valor_pago:.2f}")
+
+        if valor_pago >= total:
+            troco = valor_pago - total
+            print(f"Pagamento realizado com sucesso! Troco: R${troco:.2f}")
+        else:
+            falta = total - valor_pago
+            print(f"Pagamento não realizado. Faltam R${falta:.2f}.")
 
 def main():
     hamburgueria = Hamburgueria()
