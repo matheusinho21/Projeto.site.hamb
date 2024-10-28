@@ -43,7 +43,7 @@ class Hamburgueria:
         self.sabores = []
         self.pedidos = []
         self.clientes = []
-        self.adicionar_produtos_iniciais()  # Adicionando produtos iniciais
+        self.adicionar_produtos_iniciais() 
     
     def adicionar_produtos_iniciais(self):
         self.cadastrar_produto("X Bacon", 23.90)
@@ -100,7 +100,7 @@ class Hamburgueria:
         total = pedido.calcular_total()
         print(f'Total do pedido: R${total:.2f}')
         
-        # Seleção de forma de pagamento
+        
         print("Escolha a forma de pagamento:")
         print("1. Cartão de Crédito")
         print("2. Dinheiro")
